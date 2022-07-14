@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Let's Practice!!</title>
+    <style>
+        /* form 꾸미기 */
+        form{
+            width: 800px;
+            height: 200px;
+            border-radius: 10px;
+            background-color: lightgray;
+        }
+        /* label 꾸미기 */
+        label{
+            margin: 5px 0 0 15px;
+        }
+        /* input-text block 속성으로 만들고 여백주기. */
+        input[type=text], select{
+            width: 100%;
+            margin: 0 0 10px 15px;
+        }
+        /* input-submit 꾸미기 */
+        input[type=submit]{
+            width: 600px;
+            margin-left: 15px;
+            border-color: lightgreen;
+            border-radius: 8px;
+            background-color: lightgreen;
+        }
+        /* input-submit 위로 마우스 올라갈 때 */
+        input[type=submit]:hover{
+            border-color: green;
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <form>
+        <!-- FirstName 만들기 -->
+        <label for="fName">FirstName</label>
+        <input type="text" id="fName" name="fName" placeholder="Input your firstname!">
+        <!-- LastName 만들기 -->
+        <label for="lName">LastName</label>
+        <input type="text" id="lName" name="lName" placeholder="Input your lastname!">
+        <!-- label 만들기 -->
+        <label for="country">Country</label>
+        <select id="country" name="country">
+            <option>KOREA</option>
+            <option>USA</option>
+            <option>CHINA</option>
+            <option>JAPAN</option>
+        </select>
+        <!-- submit 만들기 -->
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+</body>
+</html>
