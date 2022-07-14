@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Let's Practice!</title>
+    <style>
+        /* default 색 */
+        a:link{
+            color:red;
+        }
+        /* 방문한 적 있을 때 색 */
+        a:visited{
+            color:green;
+        }
+        /* 마우스가 링크 위에 있을 때 색 */
+        a:hover{
+            color:hotpink;
+        }
+        /* 링크를 클릭하는 동안 색 */
+        a:active{
+            color:blue;
+        }
+        div{
+            background-color: green;
+            color: black;
+            padding: 25px;
+            text-align: center;
+        }
+        /* div 위에 마우스가 있을 때 */
+        div:hover{
+            background-color: blue;
+        }
+        p{
+            display: none;
+            background-color: yellow;
+            padding: 20px;
+        }
+        /* div에 마우스가 올라갈 때 p style*/
+        div:hover p{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div>Mouse Over Me!</div>
+
+<div>
+    Mouse Over Me to see sentence!
+    <p><a href="https://www.google.com">Google</a></p>
+</div>
+</body>
+</html>
