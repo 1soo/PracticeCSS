@@ -8,7 +8,7 @@
         {
             text-align: center;
             font-size: 200%;
-            color: lightseagreen;
+            color: #20B2AA;
         }
         h6
         {
@@ -19,56 +19,61 @@
             position: relative;
             left: 50px;
             width: 200px;
-            border: 1px solid lightpink;
-        }
-        .button_NextPrprevMonth
-        {
-            background-color: lightpink;
-        }
-        .button_NextPrprevMonth:hover
-        {
-            background-color: darkorchid;
-        }
-        #button_NowMonth
-        {
-            background-color: lightgreen;
+            border: 1px solid #FFB6C1;
         }
         div
         {
             margin: auto;
             width : 700px;
-            background-color: aliceblue;
+            background-color: #F0F8FF;
             border-radius: 5px;
             box-sizing: border-box;
         }
         ul
         {
-            margin: 0;
             list-style-type: none;
         }
         li
         {
             display: inline-block;
-            border: 1px solid lightgray;
-            width : 90px;
+            border: 1px solid #D3D3D3;
+            width : 80px;
+            margin: 0 0 10px 5px;
             padding: 10px;
-            background-color: lightyellow;
+            background-color: #FFFFE0;
             border-radius: 10px;
             box-sizing: border-box;
             text-align: center;
+        }
+        .li_Saturday
+        {
+            background-color: #1E90FF;
+        }
+        .li_Sunday
+        {
+            background-color: #DB7093;
+        }
+        .button_NextPrevMonth
+        {
+            background-color: #FFB6C1;
+        }
+        .button_NextPrevMonth:hover
+        {
+            background-color: #9932CC;
+        }
+        .button_NowMonth
+        {
+            background-color: #90EE90;
         }
     </style>
 </head>
 <body>
 
 <div>
-    <h2 id="printMonth"></h2>
+    <h2 id="printYearNMonth"></h2>
 
-    <button onclick = "printDates(-1)" class="button_NextPrprevMonth">Prev Month</button>
-    <button id="button_NowMonth">!Calender!</button>
-    <button onclick = "printDates(1)" class="button_NextPrprevMonth">Next Month</button>
-
-    <p id="printarray"></p>
+    <p id="printButton"></p>
+    <p id="printWeekArray"></p>
     <p id="printDate"></p>
 </div>
 
@@ -77,36 +82,43 @@
     // 현재 날짜
     let nowDate = new Date();
 
+    printButton();
+    printWeekArray();
     printDates();
 
-    // 요일 출력 함수
-    function printweekarray()
+    // 버튼 출력 함수
+    function printButton()
     {
-        // 요일 목록
-        // 요일 : 0~6 (일~토)
-        let weekarray = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
-            html = `<ul>`;
-        for(const x of weekarray)
+        let buttonClassList = ["button_NextPrevMonth", "button_NowMonth", "button_NextPrevMonth"];
+            buttonNameList = ["PrevMonth", "NowMonth", "NextMonth"];
+            html = "";
+        for(let i = 0; i <= 2; i++)
         {
-            html += `<li style="background-color: azure; color: cornflowerblue;">&nbsp${x}&nbsp</li>`;
+            html += `<button onclick=printDates(${i-1}) class = ${buttonClassList[i]}>${buttonNameList[i]}</button>`;
         }
-        html += `</ul>`;
-        document.getElementById("printarray").innerHTML = html;
+        document.getElementById("printButton").innerHTML = html;
     }
-
+    // 요일 출력 함수(개별로 li 생성하는 거랑 for문으로 li생성하는 거랑 간격이 다른듯함)
+    function printWeekArray()
+    {
+        // 요일 : 0~6 (일~토)
+        let weekDayArr = ["일", "월", "화", "수", "목", "금", "토"],
+            html = "<ul>";
+        for(let i = 0; i < 7; i++)
+        {
+            html += `<li class="li_WeekDay">&nbsp${weekDayArr[i]}&nbsp</li>`;
+        }
+        html += "</ul>";
+        document.getElementById("printWeekArray").innerHTML = html;
+    }
     // 일 출력 함수
     function printDates(num = 0)
     {
-        printweekarray();
-
         // 1일로 설정
         nowDate.setDate(1);
 
-        // 변수에 값 설정
-
         // 월 설정 ( 이전 달 or 현재 달 or 다음 달)
         nowDate.setMonth(nowDate.getMonth() + num);
-
 
         // 현재 연도와 월
         let year = nowDate.getFullYear(),
@@ -114,36 +126,57 @@
             month = nowDate.getMonth(),
 
             // 월의 마지막 날
-            lastday = new Date(year, (month + 1), 0).getDate(),
+            lastDay = new Date(year, (month + 1), 0).getDate(),
 
             // 월의 첫 날짜 요일
-            firstweekday = nowDate.getDay(),
-            // <br> 계산용 요일
-            weekday = nowDate.getDay(),
+            firstWeekDay = nowDate.getDay(),
+
+            // 월의 마지막 날 요일
+            nextMonthFirstWeekDay = new Date(year, month + 1, 0).getDay(),
+
+            // nextline 계산용 요일
+             weekDay = nowDate.getDay(),
 
             // 출력용 변수
             html = `<ul>`;
-        for(let i = -firstweekday; i < lastday; i++)
-        {
 
+        document.getElementById("printYearNMonth").innerHTML = year + "년 " + (month + 1) + "월";
+
+        for(let i = -firstWeekDay; i < lastDay + (6 - nextMonthFirstWeekDay); i++)  // 6 - 담 달 첫 요일 = 달력 뒤 여백 채우는 수
+        {
             // 월의 첫 날 앞 여백을 -으로 채우기
             if(i < 0)
-                html += `<li>-</li>`;
+            {
+                html += `<li>&nbsp</li>`;
+            }
+            else if(i < lastDay)
+            {
+                html += "<li";
+                if(weekDay == 6)
+                {
+                    html += ' class="li_Saturday"';
+                }
+                else if(weekDay == 0)
+                {
+                    html += ' class="li_Sunday"';
+                }
+                html += `>${i + 1}</li>`;
+                // 토요일인 날짜에 </ul><ul>추가
+                weekDay++;
+                if(weekDay == 7)
+                {
+                    weekDay = 0;
+                    html += "</ul><ul>"
+                }
+            }
             else
             {
-                html += `<li>${i + 1}`;
-                // 토요일인 날짜에 <br>추가
-                if(weekday == 6) {
-                    html += `<br>`
-                    weekday = 0;
-                }
-                html += `</li>`;
-                weekday++;
+                html += `<li>&nbsp</li>`;
             }
         }
+
         html += `</ul>`;
 
-        document.getElementById("printMonth").innerHTML = (month + 1) + "월";
         document.getElementById("printDate").innerHTML = html;
     }
 
