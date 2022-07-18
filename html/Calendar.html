@@ -16,37 +16,37 @@
         button
         {
             position: relative;
-            left: 50px;
             width: 200px;
             border: 1px solid;
             font-size: 120%;
         }
         div
         {
-            margin: auto;
-            width : 700px;
+            float: left;
+            height : 150%;
             color: #FFFFE0;
             background-color: #262829;
             border-radius: 5px;
             box-sizing: border-box;
+            text-align: center;
         }
         ul
         {
             list-style-type: none;
+            margin-right: 40px;
+            border-collapse: collapse;
         }
         li
         {
             display: inline-block;
             border: 2px solid #D3D3D3;
             width : 80px;
-            margin: 0 0 10px 5px;
             padding: 10px;
             background-color: #101010;
             border-radius: 10px;
             box-sizing: border-box;
-            text-align: center;
         }
-        li:hover
+        li:active, li:checked
         {
             border: 1px solid #000000;
             background-color: #FFFFE0;
@@ -86,26 +86,87 @@
             color: #FFFFE0;
             background-color: #262829;
         }
+        .div_ToDo
+        {
+            width: 300px;
+            margin-top: 125px;
+            margin-left: 10px;
+        }
+        .div_Calendar
+        {
+            width: 660px;
+            display: inline-block;
+        }
+        .input_Submit
+        {
+            margin-top: 5px;
+            background-color: #7FFF00;
+        }
+        .input_Submit:hover
+        {
+            background-color: #006400;
+            color: #FFFFE0;
+        }
+        .clear
+        {
+            clear: both;
+        }
     </style>
 </head>
 <body>
 
-<div>
+<div class="div_Calendar">
     <h2 id="printYearNMonth"></h2>
     <p id="printButton"></p>
     <p id="printWeekArray"></p>
     <p id="printDate"></p>
 </div>
 
+<div class="div_ToDo">
+
+    <p id="Today_Date" style="font-size:300%; margin-bottom:0"></p>
+    <p id="Today_Day" style="font-size:200%; margin-top: 0"></p>
+
+    <form method = "get">
+        <label for="Time">Time</label>
+        <input type="text" id="Time" name="Time"><br>
+
+        <label for="Place">Place</label>
+        <input type="text" id="Place" name="Place"><br>
+
+        <label for="To_Do">To_Do</label>
+        <input type="text" id="To_Do" name="To_Do"><br>
+
+        <input type="submit" class="input_Submit" Value="Submit">
+    </form>
+</div>
 <script>
 
     // 현재 날짜
     let nowDate = new Date();
 
+    printToday();
     printButton();
     printWeekArray();
     printDates();
 
+    // To-Do에서 날짜와 요일 출력하는 함수
+    function printToday()
+    {
+        let WeekdayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        document.getElementById("Today_Date").innerHTML = (nowDate.getMonth()+1).toString() + "_" + nowDate.getDate().toString();
+        document.getElementById("Today_Day").innerHTML = WeekdayArr[nowDate.getDay()];
+    }
+    // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
+    function Change_ToDoDate(obj)
+    {
+        let WeekdayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            selected_Date = new Date(nowDate.getFullYear(), nowDate.getMonth(), obj.innerHTML);
+
+        document.getElementById("Today_Date").innerHTML = (selected_Date.getMonth() + 1) + "_" + selected_Date.getDate();
+        document.getElementById("Today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
+    }
     // 버튼 출력 함수
     function printButton()
     {
@@ -122,11 +183,11 @@
     function printWeekArray()
     {
         // 요일 : 0~6 (일~토)
-        let weekDayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        let WeekdayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             html = "<ul>";
         for(let i = 0; i < 7; i++)
         {
-            html += `<li class="li_Weekday">&nbsp${weekDayArr[i]}&nbsp</li>`;
+            html += `<li class="li_Weekday">&nbsp${WeekdayArr[i]}&nbsp</li>`;
         }
         html += "</ul>";
         document.getElementById("printWeekArray").innerHTML = html;
@@ -162,6 +223,7 @@
 
         document.getElementById("printYearNMonth").innerHTML = year + " - " + (month + 1);
 
+
         for(let i = -firstWeekDay; i < lastDay + (6 - nextMonthFirstWeekDay); i++)  // 6 - 담 달 첫 요일 = 달력 뒤 여백 채우는 수
         {
             // 월의 첫 날 앞 여백을 -으로 채우기
@@ -180,7 +242,7 @@
                 {
                     html += ' class="li_Sunday"';
                 }
-                html += `>${i + 1}</li>`;
+                html += ` onclick= "Change_ToDoDate(this)">${i + 1}</li>`;
                 // 토요일인 날짜에 </ul><ul>추가
                 weekDay++;
                 if(weekDay == 7)
