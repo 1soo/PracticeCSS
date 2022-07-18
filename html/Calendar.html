@@ -165,10 +165,10 @@
 
         html += (nowDate.getMonth()+1) + "-" + nowDate.getDate();
 
-        //ToDo의 날짜와 요일 출력
+        // ToDo의 날짜와 요일 출력
         document.getElementById("Today_Date").innerHTML = html;
         document.getElementById("Today_Day").innerHTML = WeekdayArr[nowDate.getDay()];
-
+        // 저장할 날짜(default = today)
         document.querySelector("#SaveTime").value = html;
     }
     // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
@@ -183,9 +183,11 @@
         if(selected_Date.getDate() < 10)
             html += "0";
         html += selected_Date.getDate();
-
+        // 선택된 날짜를 ToDo의 날짜와 요일 출력
         document.getElementById("Today_Date").innerHTML = html;
         document.getElementById("Today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
+        // 저장할 날짜
+        document.querySelector("#SaveTime").value = html;
     }
     // 버튼 출력 함수
     function printButton()
