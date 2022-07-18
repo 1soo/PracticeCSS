@@ -130,6 +130,9 @@
     <p id="Today_Day" style="font-size:200%; margin-top: 0"></p>
 
     <form method = "post">
+        <label for="SaveTime">SaveTime</label>
+        <input type="text" id="SaveTime" name="SaveTime" readonly><br>
+
         <label for="Time">Time</label>
         <input type="text" id="Time" name="Time"><br>
 
@@ -156,18 +159,32 @@
     // To-Do에서 날짜와 요일 출력하는 함수
     function printToday()
     {
-        let WeekdayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        let WeekdayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            // 10월 전이라면 월 앞에 0하나 붙이기
+            html = (nowDate.getMonth() < 9)?"0":"";
 
-        document.getElementById("Today_Date").innerHTML = (nowDate.getMonth()+1).toString() + "_" + nowDate.getDate().toString();
+        html += (nowDate.getMonth()+1) + "-" + nowDate.getDate();
+
+        //ToDo의 날짜와 요일 출력
+        document.getElementById("Today_Date").innerHTML = html;
         document.getElementById("Today_Day").innerHTML = WeekdayArr[nowDate.getDay()];
+
+        document.querySelector("#SaveTime").value = html;
     }
     // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
     function Change_ToDoDate(obj)
     {
         let WeekdayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            selected_Date = new Date(nowDate.getFullYear(), nowDate.getMonth(), obj.innerHTML);
+            selected_Date = new Date(nowDate.getFullYear(), nowDate.getMonth(), obj.innerHTML),
+            html = (nowDate.getMonth() < 9)?"0":"";
 
-        document.getElementById("Today_Date").innerHTML = (selected_Date.getMonth() + 1) + "_" + selected_Date.getDate();
+        html += (selected_Date.getMonth()+1) + "-";
+        // 10월 전이라면 월 앞에 0하나 붙이기
+        if(selected_Date.getDate() < 10)
+            html += "0";
+        html += selected_Date.getDate();
+
+        document.getElementById("Today_Date").innerHTML = html;
         document.getElementById("Today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
     }
     // 버튼 출력 함수
@@ -222,11 +239,15 @@
              weekDay = nowDate.getDay(),
 
             // 출력용 변수
-            html = `<ul>`;
+            html = year + "-";
 
-        document.getElementById("printYearNMonth").innerHTML = year + " - " + (month + 1);
+        // 10월 전이라면 월 앞에 0하나 붙이기
+        if(month < 9)
+            html += "0";
+        html += month + 1;
+        document.getElementById("printYearNMonth").innerHTML = html;
 
-
+        html = "<ul>"
         for(let i = -firstWeekDay; i < lastDay + (6 - nextMonthFirstWeekDay); i++)  // 6 - 담 달 첫 요일 = 달력 뒤 여백 채우는 수
         {
             // 월의 첫 날 앞 여백을 -으로 채우기
