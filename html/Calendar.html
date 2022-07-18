@@ -72,6 +72,12 @@
             position: absolute;
             z-index: 1;
         }
+        .li_Selected
+        {
+            border: 1px solid #000000;
+            background-color: #FFFFE0;
+            color: #151515;
+        }
         .button_NextPrevMonth
         {
             background-color: #5a5a5a;
@@ -161,8 +167,29 @@
     printButton();
     printWeekArray();
     printDates();
-    print_ToDoDefaultDate()
+    print_ToDoDefaultDate();
+    AddNRemoveClass();
 
+    // 선택한 li에 클래스 추가하고 제거하는 함수
+    function AddNRemoveClass()
+    {
+        // 버튼 누르면 ToDo창의 데이터값들이 초기화된다.
+        $(Document).ready(function(){
+            $("#printButton").click(function(){
+                $("#Today_Date").text("00-00");
+                $("#Today_Day").text("Day");
+                $("#SelectedDate").val("");
+                $("#Time").val("");
+                $("#Place").val("");
+                $("#To_Do").val("");
+            });
+            $("ul > li").click(function(){
+                $(".li_Selected").removeClass("li_Selected");
+                $(this).addClass("li_Selected");
+            });
+        });
+
+    }
     function print_ToDoDefaultDate()
     {
         document.getElementById("Today_Date").innerHTML = "00-00";
@@ -171,15 +198,24 @@
     // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
     function Select_ToDoDate(obj)
     {
+        // 버튼 누르면 ToDo창의 데이터값들이 초기화된다.
+        $("ul > li").click(function(){
+            $("#Time").val("");
+            $("#Place").val("");
+            $("#To_Do").val("");
+        });
+
         let WeekdayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             selected_Date = new Date(nowDate.getFullYear(), nowDate.getMonth(), obj.innerHTML),
+            // 10월 전이라면 월 앞에 0하나 붙이기
             html = (nowDate.getMonth() < 9)?"0":"";
 
         html += (selected_Date.getMonth()+1) + "-";
-        // 10월 전이라면 월 앞에 0하나 붙이기
+        //10일 전이라면 일 앞에 0하나 붙이기
         if(selected_Date.getDate() < 10)
             html += "0";
         html += selected_Date.getDate();
+
         // 선택된 날짜를 ToDo의 날짜와 요일 출력
         document.getElementById("Today_Date").innerHTML = html;
         document.getElementById("Today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
@@ -214,17 +250,6 @@
     // 일 출력 함수
     function printDates(num = 0)
     {
-        // 버튼 누르면 ToDo창의 데이터값들이 초기화된다.
-        $(function(){
-            $("#printButton").click(function(){
-                $("#Today_Date").text("00-00");
-                $("#Today_Day").text("Day");
-                $("#SelectedDate").val("");
-                $("#Time").val("");
-                $("#Place").val("");
-                $("#To_Do").val("");
-            })
-        });
         // 1일로 설정
         nowDate.setDate(1);
 
@@ -264,8 +289,9 @@
         html += month + 1;
         document.getElementById("printYearNMonth").innerHTML = html;
 
+        // 날짜 출력하는 ul 시작
         html = "<ul>"
-        for(let i = -firstWeekDay; i < lastDay + (6 - nextMonthFirstWeekDay); i++)  // 6 - 담 달 첫 요일 = 달력 뒤 여백 채우는 수
+        for(let i = -firstWeekDay; i < lastDay + (6 - nextMonthFirstWeekDay); i++)  // (6 - 담 달 첫 요일) = 달력 뒤 여백 채우는 수
         {
             // 월의 첫 날 앞 여백을 -으로 채우기
             if(i < 0)
