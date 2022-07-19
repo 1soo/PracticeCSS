@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Calendar</title>
     <link rel="stylesheet" href="CalendarStyle.css">
-    <script src="CalendarJS.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -22,27 +22,27 @@
     <p id="Today_Date" style="font-size:300%; margin-bottom:0"></p>
     <p id="Today_Day" style="font-size:200%; margin-top: 0"></p>
 
-    <form method = "post">
+    <form id=to_do_form method = "post">
         <label for="SelectedDate">SelectedDate</label>
         <input type="text" id="SelectedDate" name="SelectedDate" readonly><br>
 
-        <label for="Time">Time</label>
-        <input type="text" id="Time" name="Time"><br>
+        <label for="time">Time</label>
+        <input type="text" id="time" name="time" required><br>
 
-        <label for="Place">Place</label>
-        <input type="text" id="Place" name="Place"><br>
+        <label for="place">Place</label>
+        <input type="text" id="place" name="place" required><br>
 
-        <label for="To_Do">To_Do</label>
-        <input type="text" id="To_Do" name="To_Do"><br>
+        <label for="to_do">To_Do</label>
+        <input type="text" id="to_do" name="to_do" required><br>
 
         <input type="submit" class="input_Submit" Value="Submit">
     </form>
 </div>
 
+
 <h6 class="clear"></h6>
 
-<!--<script>
-/*
+<script>
     // 현재 날짜
     let nowDate = new Date();
 
@@ -51,7 +51,19 @@
     print_ToDoDefaultDate();
     printDates();
 
-
+    function sendErrorMessage()
+    {
+        $(".input_Submit").click(function(){
+            if($("#time").val() == "")
+                alert("시간이 작성되어있지 않습니다.");
+            else if($("#place").val() == "")
+                alert("장소가 작성되어있지 않습니다.");
+            else if($("#to_do").val() == "")
+                alert("메모가 작성되어있지 않습니다.");
+            else
+                alert("Submit complete");
+        });
+    }
     // 선택한 li에 클래스 추가하고 제거하는 함수
     function AddNRemoveClass()
     {
@@ -71,23 +83,8 @@
                 $(this).addClass("li_Selected");
             });
         });
-
     }
-    // To_Do창의 입력값들이 비어있으면 Submit 비활성화
-    function isEmpty()
-    {
-        $(".div_ToDo").hover(function(){
-           if($("#Time").var()=="" || $("#Place").var()=="" || $("#To_Do").var()=="")
-           {
-               $(".input_submit").hide();
-           }
-           else
-           {
-               $(".input_submit").show();
-           }
-        });
-
-    }
+    // ToDo 초기 데이터값 설정
     function print_ToDoDefaultDate()
     {
         document.getElementById("Today_Date").innerHTML = "00-00";
@@ -149,6 +146,7 @@
     function printDates(num = 0)
     {
         AddNRemoveClass();
+        sendErrorMessage();
         // 1일로 설정
         nowDate.setDate(1);
 
@@ -222,12 +220,11 @@
                 html += `<li>&nbsp</li>`;
             }
         }
-
         html += `</ul>`;
 
         document.getElementById("printDate").innerHTML = html;
-    }*/
-</script>-->
+    }
+</script>
 
 </body>
 </html>
