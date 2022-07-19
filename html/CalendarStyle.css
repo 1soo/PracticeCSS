@@ -112,6 +112,14 @@ li
     background-color: #006400;
     color: #FFFFE0;
 }
+.input_SelectedDate_down
+{
+    visibility: hidden;
+}
+.input_SelectedDate_up
+{
+    background-color: #a9a9a9;
+}
 .clear
 {
     clear: both;
