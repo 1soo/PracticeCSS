@@ -1,0 +1,118 @@
+h2
+{
+    text-align: center;
+    font-size: 200%;
+}
+h6
+{
+    visibility: hidden;
+}
+button
+{
+    position: relative;
+    width: 200px;
+    border: 1px solid;
+    font-size: 120%;
+}
+div
+{
+    float: left;
+    height : 150%;
+    color: #FFFFE0;
+    background-color: #262829;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+}
+ul
+{
+    list-style-type: none;
+    margin-right: 40px;
+    border-collapse: collapse;
+}
+li
+{
+    display: inline-block;
+    border: 2px solid #D3D3D3;
+    width : 80px;
+    padding: 10px;
+    background-color: #101010;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+#printDate li:hover
+{
+    border: 1px solid #000000;
+    background-color: #FFFFE0;
+    color: #151515;
+}
+.li_Weekday
+{
+    font-size: 125%;
+    pointer-events: none;
+}
+.li_Saturday
+{
+    background-color: #1E90FF;
+}
+.li_Sunday
+{
+    background-color: #DB7093;
+}
+.li_Content
+{
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+.li_Selected
+{
+    border: 1px solid #000000;
+    background-color: #FFFFE0;
+    color: #151515;
+}
+.button_NextPrevMonth
+{
+    background-color: #5a5a5a;
+    color: #D3D3D3;
+}
+.button_NextPrevMonth:hover
+{
+    background-color: #FFFFE0;
+    color: #262829;
+}
+.button_NowMonth
+{
+    background-color: #262829;
+    color: #FFFFE0;
+}
+.button_NowMonth:hover
+{
+    background-color: #FFFFE0;
+    color: #262829;
+}
+.div_ToDo
+{
+    width: 300px;
+    margin-top: 125px;
+    margin-left: 10px;
+}
+.div_Calendar
+{
+    width: 660px;
+    display: inline-block;
+}
+.input_Submit
+{
+    margin-top: 5px;
+    background-color: #7FFF00;
+}
+.input_Submit:hover
+{
+    background-color: #006400;
+    color: #FFFFE0;
+}
+.clear
+{
+    clear: both;
+}
