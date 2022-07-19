@@ -1,4 +1,7 @@
-import "https://code.jquery.com/jquery-3.6.0.min.js"
+var s = document.createElement("script");
+s.type = "text/javascript";
+s.src = "https://code.jquery.com/jquery-3.6.0.min.js";
+$("head").append(s);
 // 현재 날짜
 let nowDate = new Date();
 

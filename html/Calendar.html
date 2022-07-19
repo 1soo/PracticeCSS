@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Calendar</title>
     <link rel="stylesheet" href="CalendarStyle.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="CalendarJS.js"></script>
 </head>
 <body>
 
@@ -40,15 +40,17 @@
 </div>
 
 <h6 class="clear"></h6>
-<script>
 
+<!--<script>
+/*
     // 현재 날짜
     let nowDate = new Date();
 
     printButton();
     printWeekArray();
-    printDates();
     print_ToDoDefaultDate();
+    printDates();
+
 
     // 선택한 li에 클래스 추가하고 제거하는 함수
     function AddNRemoveClass()
@@ -68,6 +70,21 @@
                 $(".li_Selected").removeClass("li_Selected");
                 $(this).addClass("li_Selected");
             });
+        });
+
+    }
+    // To_Do창의 입력값들이 비어있으면 Submit 비활성화
+    function isEmpty()
+    {
+        $(".div_ToDo").hover(function(){
+           if($("#Time").var()=="" || $("#Place").var()=="" || $("#To_Do").var()=="")
+           {
+               $(".input_submit").hide();
+           }
+           else
+           {
+               $(".input_submit").show();
+           }
         });
 
     }
@@ -209,10 +226,8 @@
         html += `</ul>`;
 
         document.getElementById("printDate").innerHTML = html;
-    }
-
-
-</script>
+    }*/
+</script>-->
 
 </body>
 </html>
