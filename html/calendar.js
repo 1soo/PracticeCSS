@@ -41,8 +41,8 @@ function AddNRemoveClass()
     // 버튼 누르면 ToDo창의 데이터값들이 초기화된다.
     // 날짜를 선택하면 해당하는 날짜가 선택된다.
     $("#printButton").click(function(){
-        $("#Today_Date").text("00-00");
-        $("#Today_Day").text("Day");
+        $("#today_Date").text("00-00");
+        $("#today_Day").text("Day");
         $("#SelectedDate_up").val("");
         $("#SelectedDate_down").val("");
         $("#Time").val("");
@@ -57,8 +57,8 @@ function AddNRemoveClass()
 // ToDo 초기 데이터값 설정
 function print_ToDoDefaultDate()
 {
-    document.getElementById("Today_Date").innerHTML = "00-00";
-    document.getElementById("Today_Day").innerHTML = "Day";
+    document.getElementById("today_Date").innerHTML = "00-00";
+    document.getElementById("today_Day").innerHTML = "Day";
 }
 // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
 function Select_ToDoDate(obj)
@@ -82,8 +82,8 @@ function Select_ToDoDate(obj)
     html += selected_Date.getDate();
 
     // 선택된 날짜를 ToDo의 날짜와 요일 출력
-    document.getElementById("Today_Date").innerHTML = html;
-    document.getElementById("Today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
+    document.getElementById("today_Date").innerHTML = html;
+    document.getElementById("today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
     // 저장할 날짜
     document.querySelector("#SelectedDate_up").value = html;
     document.querySelector("#SelectedDate_down").value = html;
