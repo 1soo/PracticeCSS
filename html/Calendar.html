@@ -24,9 +24,10 @@
     <p id="today_Date" style="font-size:300%; margin-bottom:0"></p>
     <p id="today_Day" style="font-size:200%; margin-top: 0"></p>
 
-    <label for="SelectedDate_up">Selected</label>
-    <input type="text" id="SelectedDate_up" class="input_SelectedDate_up" name="SelectedDate_up" value="" readonly>
     <form id=to_do_form method = "get">
+        <label for="SelectedDate">Selected:</label>
+        <label><span id="SelectedDate"></span></label><br>
+
         <label for="time">Time</label>
         <input type="text" id="time" name="time" value="" required><br>
 
@@ -37,7 +38,6 @@
         <input type="text" id="to_do" name="to_do" value="" required><br>
 
         <input type="submit" class="input_Submit" value="Submit"><br>
-        <input type="text" id="SelectedDate_down" class="input_SelectedDate_down" name="SelectedDate_down" value="" required>
     </form>
 </div>
 

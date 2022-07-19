@@ -13,7 +13,7 @@ $(document).ready(function () {
 function sendErrorMessage()
 {
     $(".input_Submit").click(function(){
-        if($("#SelectedDate_down").val() == "")
+        if($("#SelectedDate").text() == "")
         {
             alert("날짜가 선택되어있지 않습니다.");
         }
@@ -35,23 +35,27 @@ function sendErrorMessage()
         }
     });
 }
-// 선택한 li에 클래스 추가하고 제거하는 함수
-function AddNRemoveClass()
+function select_li()
+{
+    $("ul > li").click(function(){
+        if($(this).html() != '&nbsp;')
+        {
+            $(".li_Selected").removeClass("li_Selected");
+            $(this).addClass("li_Selected");
+        }
+    });
+}
+
+function ToDo_Init()
 {
     // 버튼 누르면 ToDo창의 데이터값들이 초기화된다.
-    // 날짜를 선택하면 해당하는 날짜가 선택된다.
     $("#printButton").click(function(){
         $("#today_Date").text("00-00");
         $("#today_Day").text("Day");
-        $("#SelectedDate_up").val("");
-        $("#SelectedDate_down").val("");
+        $("#SelectedDate").text("");
         $("#Time").val("");
         $("#Place").val("");
         $("#To_Do").val("");
-    });
-    $("ul > li").click(function(){
-        $(".li_Selected").removeClass("li_Selected");
-        $(this).addClass("li_Selected");
     });
 }
 // ToDo 초기 데이터값 설정
@@ -63,13 +67,6 @@ function print_ToDoDefaultDate()
 // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
 function Select_ToDoDate(obj)
 {
-    // 버튼 누르면 ToDo창의 데이터값들이 초기화된다.
-    $("ul > li").click(function(){
-        $("#Time").val("");
-        $("#Place").val("");
-        $("#To_Do").val("");
-    });
-
     let WeekdayArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
         selected_Date = new Date(nowDate.getFullYear(), nowDate.getMonth(), obj.innerHTML),
         // 10월 전이라면 월 앞에 0하나 붙이기
@@ -85,8 +82,7 @@ function Select_ToDoDate(obj)
     document.getElementById("today_Date").innerHTML = html;
     document.getElementById("today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
     // 저장할 날짜
-    document.querySelector("#SelectedDate_up").value = html;
-    document.querySelector("#SelectedDate_down").value = html;
+    document.querySelector("#SelectedDate").innerHTML = html;
 }
 // 버튼 출력 함수
 function printButton()
@@ -116,8 +112,7 @@ function printWeekArray()
 // 일 출력 함수
 function printDates(num = 0)
 {
-    AddNRemoveClass();
-    sendErrorMessage();
+    ToDo_Init();
     // 1일로 설정
     nowDate.setDate(1);
 
@@ -164,7 +159,7 @@ function printDates(num = 0)
         // 월의 첫 날 앞 여백을 -으로 채우기
         if(i < 0)
         {
-            html += `<li>&nbsp</li>`;
+            html += '<li>' + '&nbsp' + '</li>';
         }
         else if(i < lastDay)
         {
@@ -183,15 +178,18 @@ function printDates(num = 0)
             if(weekDay == 7)
             {
                 weekDay = 0;
+
                 html += "</ul><ul>"
             }
         }
         else
         {
-            html += `<li>&nbsp</li>`;
+            html += '<li>' + '&nbsp' + '</li>';
         }
     }
     html += `</ul>`;
 
     document.getElementById("printDate").innerHTML = html;
+    select_li();
+    sendErrorMessage();
 }
