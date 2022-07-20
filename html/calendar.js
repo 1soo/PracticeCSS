@@ -6,13 +6,14 @@ $(document).ready(function () {
     printWeekArray();
     print_ToDoDefaultDate();
     printDates();
+    sendErrorMessage();
 });
 
 
 
 function sendErrorMessage()
 {
-    $(".input_Submit").click(function(){
+    $(".button_Submit").click(function(){
         if($("#SelectedDate").text() == "")
         {
             alert("날짜가 선택되어있지 않습니다.");
@@ -38,7 +39,7 @@ function sendErrorMessage()
 function select_li()
 {
     $("ul > li").click(function(){
-        if($(this).html() != '&nbsp;')
+        if($(this).html() != '&nbsp')
         {
             $(".li_Selected").removeClass("li_Selected");
             $(this).addClass("li_Selected");
@@ -191,5 +192,4 @@ function printDates(num = 0)
 
     document.getElementById("printDate").innerHTML = html;
     select_li();
-    sendErrorMessage();
 }

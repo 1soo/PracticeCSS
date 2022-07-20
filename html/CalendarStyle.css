@@ -85,6 +85,17 @@ li
     background-color: #FFFFE0;
     color: #262829;
 }
+.button_Submit
+{
+    margin-top: 5px;
+    width: 60%;
+    background-color: #7FFF00;
+}
+.button_Submit:hover
+{
+    background-color: #006400;
+    color: #FFFFE0;
+}
 .div_ToDo
 {
     width: 300px;
@@ -95,16 +106,6 @@ li
 {
     width: 660px;
     display: inline-block;
-}
-.input_Submit
-{
-    margin-top: 5px;
-    background-color: #7FFF00;
-}
-.input_Submit:hover
-{
-    background-color: #006400;
-    color: #FFFFE0;
 }
 .clear
 {
