@@ -18,7 +18,8 @@ div
 {
     float: left;
     height : 150%;
-    color: #FFFFE0;
+    color: #FFFFFF;
+    margin-left: 5px;
     background-color: #262829;
     border-radius: 5px;
     box-sizing: border-box;
@@ -43,7 +44,7 @@ li
 #printDate li:hover
 {
     border: 1px solid #000000;
-    background-color: #FFFFE0;
+    background-color: #FFFFFF;
     color: #151515;
 }
 .li_Weekday
@@ -62,7 +63,7 @@ li
 .li_Selected
 {
     border: 1px solid #000000;
-    background-color: #FFFFE0;
+    background-color: #FFFFFF;
     color: #151515;
 }
 .button_NextPrevMonth
@@ -72,40 +73,68 @@ li
 }
 .button_NextPrevMonth:hover
 {
-    background-color: #FFFFE0;
+    background-color: #FFFFFF;
     color: #262829;
 }
 .button_NowMonth
 {
     background-color: #262829;
-    color: #FFFFE0;
+    color: #FFFFFF;
 }
 .button_NowMonth:hover
 {
-    background-color: #FFFFE0;
+    background-color: #FFFFFF;
     color: #262829;
 }
-.button_Submit
+.button_SaveMemo
 {
     margin-top: 5px;
-    width: 60%;
+    font-size: 100%;
+    width: 40%;
     background-color: #7FFF00;
 }
-.button_Submit:hover
+.button_SaveMemo:hover
 {
     background-color: #006400;
-    color: #FFFFE0;
+    color: #FFFFFF;
 }
-.div_ToDo
+.button_GetMemo
 {
-    width: 300px;
-    margin-top: 125px;
-    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 100%;
+    width: 50%;
+    background-color: #7FFF00;
+}
+.button_GetMemo:hover
+{
+    background-color: #006400;
+    color: #FFFFFF;
 }
 .div_Calendar
 {
     width: 660px;
     display: inline-block;
+}
+.div_ToDo
+{
+    background-color: #5a5a5a;
+    width: 250px;
+    margin: 50px 10px 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.div_GetMemo
+{
+    background-color: #5a5a5a;
+    width: 250px;
+    margin: 10px 10px 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.div_ShowSelectedDate
+{
+    margin-left: 75px;
+    text-align: center;
 }
 .clear
 {

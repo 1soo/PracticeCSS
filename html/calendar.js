@@ -4,66 +4,111 @@ let nowDate = new Date();
 $(document).ready(function () {
     printButton();
     printWeekArray();
-    print_ToDoDefaultDate();
     printDates();
     sendErrorMessage();
+    MonthAddSubButtonClicked();
+    ToDo_date_Init();
+    ToDo_input_Init();
 });
 
-
-
+// 키 값은 날짜와 시간, value는 시간과 장소와 메모 내용
+// SaveMemo 버튼이 눌렸을 때 localStorage로 setItem()함.
+// GetMemo 버튼이 눌렸을 때 loacalStorage로부터 getItem()함.
+// SaveMemo or GetMemo 버튼이 눌렸을 때 위의 입력값들이 비어있으면 에러알림.
 function sendErrorMessage()
 {
-    $(".button_Submit").click(function(){
-        if($("#SelectedDate").text() == "")
-        {
+    $(".button_SaveMemo").click(function()
+    {
+        if($("#SelectedDate").val() == "") {
             alert("날짜가 선택되어있지 않습니다.");
         }
         else if($("#time").val() == "")
         {
-            alert("시간이 작성되어있지 않습니다.");
+            alert("시간이 입력되어있지 않습니다.");
         }
         else if($("#place").val() == "")
         {
-            alert("장소가 작성되어있지 않습니다.");
+            alert("장소가 입력되어있지 않습니다.");
         }
         else if($("#to_do").val() == "")
         {
-            alert("메모가 작성되어있지 않습니다.");
+            alert("메모가 입력되어있지 않습니다.");
         }
         else
         {
-            alert("Submit complete");
+            localStorage.setItem($("#SelectedDate").val() + "-" + $("#time").val(),
+                JSON.stringify({"time": $("#time").val(), "place": $("#place").val(), "to_do": $("#to_do").val()}))
+            alert("메모 저장이 완료되었습니다.");
+            ToDo_date_Init();
+            ToDo_input_Init();
+            $(".li_Selected").removeClass("li_Selected");
+        }
+    });
+    $(".button_GetMemo").click(function()
+    {
+        if($("#findDate").val() == "")
+        {
+            alert("날짜가 선택되어있지 않습니다.");
+        }
+        else if($("#findTime").val() == "")
+        {
+            alert("시간이 입력되어있지 않습니다.")
+        }
+        else
+        {
+            if(localStorage.getItem($("#SelectedDate").val() + "-" + $("#findTime").val()))
+            {
+                const getMemo = localStorage.getItem($("#SelectedDate").val() + "-" + $("#findTime").val());
+                let printMemo = JSON.parse(getMemo);
+                $("#showMemo").val("time : " + printMemo.time + "\nplace: " + printMemo.place + "\nto_do : " + printMemo.to_do);
+            }
+            else
+            {
+                alert("찾으시는 날짜 또는 시간에 메모가 저장되어있지 않습니다.");
+                ToDo_date_Init();
+                ToDo_input_Init();
+                $(".li_Selected").removeClass("li_Selected");
+            }
         }
     });
 }
+// ToDo의 선택된 날짜 초기화
+function ToDo_date_Init()
+{
+    $("#today_Date").text("00-00");
+    $("#today_Day").text("Day");
+    $("#SelectedDate").val("");
+    $("#findDate").val("");
+}
+// ToDo의 입력값들 초기화
+function ToDo_input_Init()
+{
+    $("#time").val("");
+    $("#place").val("");
+    $("#to_do").val("");
+    $("#findTime").val("");
+    $("#showMemo").val("");
+}
+// 다음달, 이번달 버튼이 눌렸을 때
+function MonthAddSubButtonClicked()
+{
+    $("#printButton").click(function()
+    {
+        ToDo_date_Init();
+        ToDo_input_Init();
+    });
+}
+// 달력의 일들을 눌렀을 때
 function select_li()
 {
     $("ul > li").click(function(){
-        if($(this).html() != '&nbsp')
+        if($(this).text() != '&nbsp')
         {
             $(".li_Selected").removeClass("li_Selected");
             $(this).addClass("li_Selected");
+            ToDo_input_Init();
         }
     });
-}
-
-function ToDo_Init()
-{
-    // 버튼 누르면 ToDo창의 데이터값들이 초기화된다.
-    $("#printButton").click(function(){
-        $("#today_Date").text("00-00");
-        $("#today_Day").text("Day");
-        $("#SelectedDate").text("");
-        $("#Time").val("");
-        $("#Place").val("");
-        $("#To_Do").val("");
-    });
-}
-// ToDo 초기 데이터값 설정
-function print_ToDoDefaultDate()
-{
-    document.getElementById("today_Date").innerHTML = "00-00";
-    document.getElementById("today_Day").innerHTML = "Day";
 }
 // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
 function Select_ToDoDate(obj)
@@ -72,18 +117,18 @@ function Select_ToDoDate(obj)
         selected_Date = new Date(nowDate.getFullYear(), nowDate.getMonth(), obj.innerHTML),
         // 10월 전이라면 월 앞에 0하나 붙이기
         html = (nowDate.getMonth() < 9)?"0":"";
-
-    html += (selected_Date.getMonth()+1) + "-";
+    html += (nowDate.getMonth()+1) + "-";
     //10일 전이라면 일 앞에 0하나 붙이기
-    if(selected_Date.getDate() < 10)
+    if(obj.innerHTML < 10)
         html += "0";
-    html += selected_Date.getDate();
+    html += obj.innerHTML;
 
     // 선택된 날짜를 ToDo의 날짜와 요일 출력
     document.getElementById("today_Date").innerHTML = html;
     document.getElementById("today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
     // 저장할 날짜
-    document.querySelector("#SelectedDate").innerHTML = html;
+    $("#SelectedDate").val(selected_Date.getFullYear() + "-" + html);
+    $("#findDate").val(selected_Date.getFullYear() + "-" + html);
 }
 // 버튼 출력 함수
 function printButton()
@@ -113,7 +158,6 @@ function printWeekArray()
 // 일 출력 함수
 function printDates(num = 0)
 {
-    ToDo_Init();
     // 1일로 설정
     nowDate.setDate(1);
 

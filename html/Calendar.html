@@ -19,29 +19,46 @@
 </div>
 
 <!-- To-Do 메모 -->
-<div class="div_ToDo">
+<div>
+    <h6 class="clear"></h6>
 
-    <p id="today_Date" style="font-size:300%; margin-bottom:0"></p>
-    <p id="today_Day" style="font-size:200%; margin-top: 0"></p>
+    <div class="div_ShowSelectedDate">
+        <p class="showSelectedDate">
+        <span id="today_Date" style="font-size:300%; margin-bottom:0"></span><br>
+        <span id="today_Day" style="font-size:200%; margin-top: 0"></span>
+        </p>
+    </div>
+    <h6 class="clear"></h6>
 
-    <form id=to_do_form method = "get">
-        <label for="SelectedDate">Selected:</label>
-        <label><span id="SelectedDate"></span></label><br>
+    <div class="div_ToDo">
+        <form>
+            <input type="hidden" id="SelectedDate" name="SelectedDate" value="">
 
-        <label for="time">Time</label>
-        <input type="text" id="time" name="time" value="" required><br>
+            <label for="time">Time</label>
+            <input type="text" id="time" name="time" value=""><br>
 
-        <label for="place">Place</label>
-        <input type="text" id="place" name="place" value="" required><br>
+            <label for="place">Place</label>
+            <input type="text" id="place" name="place" value=""><br>
 
-        <label for="to_do">To_Do</label>
-        <input type="text" id="to_do" name="to_do" value="" required><br>
+            <label for="to_do">To_Do</label>
+            <input type="text" id="to_do" name="to_do" value=""><br>
+        </form>
+            <button class="button_SaveMemo">Save Memo</button>
+    </div>
 
-        <button class="button_Submit">Submit</button>
-    </form>
+    <h6 class="clear"></h6>
+
+    <div class="div_GetMemo">
+        <form>
+            <input type="hidden" id="findDate" name="findDate" value="">
+            <label for="findTime">Input Time(--:--)</label><br>
+            <input type="text" id="findTime" name="findTime" value=""><br>
+        </form>
+        <button class="button_GetMemo">Get Memo</button><br>
+        <label for="showMemo">Saved Memo</label><br>
+        <textarea rows="5" cols="20" id="showMemo" class="input_showMemo" name="showMemo" value=""></textarea>
+    </div>
 </div>
-
-<h6 class="clear"></h6>
 
 </body>
 </html>
