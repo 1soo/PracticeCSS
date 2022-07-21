@@ -17,7 +17,6 @@ button
 div
 {
     float: left;
-    height : 150%;
     color: #FFFFFF;
     margin-left: 5px;
     background-color: #262829;
@@ -110,30 +109,46 @@ li
     background-color: #006400;
     color: #FFFFFF;
 }
+.button_changeWindow
+{
+    background-color: #7FFF00;
+}
+.button_changeWindow:hover
+{
+    background-color: #006400;
+    color: #FFFFFF;
+}
 .div_Calendar
 {
     width: 660px;
+    height: 570px;
     display: inline-block;
+}
+.div_subWindow
+{
+    width: 270px;
 }
 .div_ToDo
 {
     background-color: #5a5a5a;
     width: 250px;
-    margin: 50px 10px 10px 10px;
-    padding-top: 10px;
+    height: 150px;
+    margin: 20px 10px 10px 10px;
+    padding-top: 30px;
     padding-bottom: 10px;
 }
 .div_GetMemo
 {
     background-color: #5a5a5a;
     width: 250px;
-    margin: 10px 10px 10px 10px;
+    height: 200px;
+    margin: 20px 10px 10px 10px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 .div_ShowSelectedDate
 {
-    margin-left: 75px;
+    margin-left: 35px;
     text-align: center;
 }
 .clear

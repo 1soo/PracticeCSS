@@ -9,10 +9,22 @@ $(document).ready(function () {
     MonthAddSubButtonClicked();
     ToDo_date_Init();
     ToDo_input_Init();
+    hideToggle();
 });
-
-// 키 값은 날짜와 시간, value는 시간과 장소와 메모 내용
+// Change 버튼을 눌렀을 때 밑 윈도우 2개를 toggle()한다.
+function hideToggle()
+{
+    $(".div_GetMemo").toggle();
+    $(".button_changeWindow").click(function()
+    {
+        ToDo_date_Init();
+        ToDo_input_Init();
+        $(".div_ToDo").toggle(300);
+        $(".div_GetMemo").toggle(300);
+    })
+}
 // SaveMemo 버튼이 눌렸을 때 localStorage로 setItem()함.
+// 키 값은 날짜와 시간, value는 시간과 장소와 메모 내용
 // GetMemo 버튼이 눌렸을 때 loacalStorage로부터 getItem()함.
 // SaveMemo or GetMemo 버튼이 눌렸을 때 위의 입력값들이 비어있으면 에러알림.
 function sendErrorMessage()
@@ -22,15 +34,15 @@ function sendErrorMessage()
         if($("#SelectedDate").val() == "") {
             alert("날짜가 선택되어있지 않습니다.");
         }
-        else if($("#time").val() == "")
+        else if(!($("#time").val().match(/\d{2}:\d{2}/)))
         {
             alert("시간이 입력되어있지 않습니다.");
         }
-        else if($("#place").val() == "")
+        else if(!($("#place").val().match(/[a-z/A-Z/가-힣/]+/g)))
         {
             alert("장소가 입력되어있지 않습니다.");
         }
-        else if($("#to_do").val() == "")
+        else if(!($("#to_do").val().match(/[a-z/A-Z/가-힣/]+/g)))
         {
             alert("메모가 입력되어있지 않습니다.");
         }
@@ -50,13 +62,13 @@ function sendErrorMessage()
         {
             alert("날짜가 선택되어있지 않습니다.");
         }
-        else if($("#findTime").val() == "")
+        else if(!($("#findTime").val().match(/\d{2}:\d{2}/)))
         {
             alert("시간이 입력되어있지 않습니다.")
         }
         else
         {
-            if(localStorage.getItem($("#SelectedDate").val() + "-" + $("#findTime").val()))
+            if(localStorage.getItem($("#findDate").val() + "-" + $("#findTime").val()))
             {
                 const getMemo = localStorage.getItem($("#SelectedDate").val() + "-" + $("#findTime").val());
                 let printMemo = JSON.parse(getMemo);
@@ -108,7 +120,11 @@ function select_li()
             $(this).addClass("li_Selected");
             ToDo_input_Init();
         }
-
+        if($("#findTime").val() != "")
+        {
+            if(localStorage.getItem($("#findDate").var() + "-" + /\d{2}:\d{2}/))
+                alert("성공");
+        }
     });
 }
 // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
