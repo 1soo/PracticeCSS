@@ -102,9 +102,13 @@ function MonthAddSubButtonClicked()
 function select_li()
 {
     $("ul > li").click(function(){
-        $(".li_Selected").removeClass("li_Selected");
-        $(this).addClass("li_Selected");
-        ToDo_input_Init();
+        if($(this).text() != '\u00a0')
+        {
+            $(".li_Selected").removeClass("li_Selected");
+            $(this).addClass("li_Selected");
+            ToDo_input_Init();
+        }
+
     });
 }
 // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
@@ -201,7 +205,7 @@ function printDates(num = 0)
         // 월의 첫 날 앞 여백을 -으로 채우기
         if(i < 0)
         {
-            html += '<li class="li_emptySpace">' + '&nbsp' + '</li>';
+            html += '<li>' + '&nbsp' + '</li>';
         }
         else if(i < lastDay)
         {
@@ -226,7 +230,7 @@ function printDates(num = 0)
         }
         else
         {
-            html += '<li class="li_emptySpace">' + '&nbsp' + '</li>';
+            html += '<li>' + '&nbsp' + '</li>';
         }
     }
     html += `</ul>`;

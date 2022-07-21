@@ -47,10 +47,6 @@ li
     background-color: #FFFFFF;
     color: #151515;
 }
-.li_emptySpace
-{
-    pointer-events: none;
-}
 .li_Weekday
 {
     font-size: 125%;
