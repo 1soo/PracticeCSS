@@ -50,7 +50,15 @@ li
 {
     color: #1E90FF;
 }
+.printWeek_Saturday_Calendar
+{
+    color: #1E90FF;
+}
 .printWeek_Sunday
+{
+    color: #DB7093;
+}
+.printWeek_Sunday_Calendar
 {
     color: #DB7093;
 }

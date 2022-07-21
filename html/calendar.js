@@ -190,7 +190,16 @@ function printWeekArray()
         html = "<ul>";
     for(let i = 0; i < 7; i++)
     {
-        html += `<li class="li_Weekday">&nbsp${WeekdayArr[i]}&nbsp</li>`;
+        html += '<li class="li_Weekday';
+        if(i == 0)
+        {
+            html += ' printWeek_Sunday_Calendar'
+        }
+        else if(i == 6)
+        {
+            html += ' printWeek_Saturday_Calendar'
+        }
+        html += `">&nbsp${WeekdayArr[i]}&nbsp</li>`;
     }
     html += "</ul>";
     $("#printWeekArray").html(html);
