@@ -21,6 +21,9 @@ function hideToggle()
         ToDo_input_Init();
         $(".div_ToDo").toggle(300);
         $(".div_GetMemo").toggle(300);
+        $(".li_Selected").removeClass("li_Selected");
+        $(".printWeek_Saturday").removeClass("printWeek_Saturday");
+        $(".printWeek_Sunday").removeClass("printWeek_Sunday");
     })
 }
 // SaveMemo 버튼이 눌렸을 때 localStorage로 setItem()함.
@@ -201,6 +204,7 @@ function printDates(num = 0)
     // 월 설정 ( 이전 달 or 현재 달 or 다음 달)
     if(num == 0)
     {
+        nowDate.setFullYear(new Date().getFullYear());
         nowDate.setMonth(new Date().getMonth());
     }
     else
