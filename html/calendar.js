@@ -127,6 +127,25 @@ function select_li()
         }
     });
 }
+// to_do창의 요일이 주말일 경우 색깔 변경하는 함수
+function ifSaturdayNSunday(number)
+{
+    if(number == 6)
+    {
+        $(".printWeek_Sunday").removeClass("printWeek_Sunday");
+        $("#today_Day").addClass("printWeek_Saturday")
+    }
+    else if(number == 0)
+    {
+        $(".printWeek_Saturday").removeClass("printWeek_Saturday");
+        $("#today_Day").addClass("printWeek_Sunday")
+    }
+    else
+    {
+        $(".printWeek_Saturday").removeClass("printWeek_Saturday");
+        $(".printWeek_Sunday").removeClass("printWeek_Sunday");
+    }
+}
 // 마우스로 달력의 날짜를 클릭하면 ToDo창의 날짜를 그 날짜로 변경하는 함수
 function Select_ToDoDate(obj)
 {
@@ -141,8 +160,9 @@ function Select_ToDoDate(obj)
     html += obj.innerHTML;
 
     // 선택된 날짜를 ToDo의 날짜와 요일 출력
-    document.getElementById("today_Date").innerHTML = html;
-    document.getElementById("today_Day").innerHTML = WeekdayArr[selected_Date.getDay()];
+    $("#today_Date").html(html);
+    $("#today_Day").html(WeekdayArr[selected_Date.getDay()]);
+    ifSaturdayNSunday(selected_Date.getDay());
     // 저장할 날짜
     $("#SelectedDate").val(selected_Date.getFullYear() + "-" + html);
     $("#findDate").val(selected_Date.getFullYear() + "-" + html);
@@ -170,7 +190,7 @@ function printWeekArray()
         html += `<li class="li_Weekday">&nbsp${WeekdayArr[i]}&nbsp</li>`;
     }
     html += "</ul>";
-    document.getElementById("printWeekArray").innerHTML = html;
+    $("#printWeekArray").html(html);
 }
 // 일 출력 함수
 function printDates(num = 0)
@@ -212,7 +232,7 @@ function printDates(num = 0)
     if(month < 9)
         html += "0";
     html += month + 1;
-    document.getElementById("printYearNMonth").innerHTML = html;
+    $("#printYearNMonth").html(html);
 
     // 날짜 출력하는 ul 시작
     html = "<ul>"
@@ -251,6 +271,6 @@ function printDates(num = 0)
     }
     html += `</ul>`;
 
-    document.getElementById("printDate").innerHTML = html;
+    $("#printDate").html(html);
     select_li();
 }

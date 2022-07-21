@@ -46,6 +46,14 @@ li
     background-color: #FFFFFF;
     color: #151515;
 }
+.printWeek_Saturday
+{
+    color: #1E90FF;
+}
+.printWeek_Sunday
+{
+    color: #DB7093;
+}
 .li_Weekday
 {
     font-size: 125%;
