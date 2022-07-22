@@ -11,6 +11,7 @@ $(document).ready(function () {
     ToDo_input_Init();
     hideToggle();
 });
+
 // Change 버튼을 눌렀을 때 밑 윈도우 2개를 toggle()한다.
 function hideToggle()
 {
